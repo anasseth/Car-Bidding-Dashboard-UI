@@ -1,0 +1,33 @@
+<div *ngIf="data.mode.toString() == 'add'" mat-dialog-content>
+  <p>Add Notes</p>
+  <input type="text" class="notesInput" />
+</div>
+<div
+  *ngIf="data.mode.toString() == 'view' && isNoteEdit == false"
+  mat-dialog-content
+>
+  <p>Notes</p>
+  <p>
+    Testing Notes
+    <b style="float: right"
+      ><fa-icon
+        [icon]="pen"
+        style="font-size: 14px; color: black"
+        (click)="onClickEdit()"
+      ></fa-icon
+    ></b>
+  </p>
+</div>
+<div
+  *ngIf="data.mode.toString() == 'view' && isNoteEdit == true"
+  mat-dialog-content
+>
+  <p>Edit Notes</p>
+  <input [(ngModel)]="inputValue" type="text" class="notesInput" />
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()" class="close">Close</button>
+  <button mat-button cdkFocusInitial (click)="onNoClick()" class="save">
+    Save
+  </button>
+</div>

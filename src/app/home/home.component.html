@@ -1,0 +1,356 @@
+<div class="HomeMainContainer">
+  <div class="HomeContentContainer">
+    <div class="LeftSideTable">
+      <table class="SideTable">
+        <thead>
+          <tr>
+            <td (click)="sortByID()">VIN</td>
+            <td (click)="sortByPercent()">Overall Score</td>
+            <td (click)="sortByFlag()">Flags</td>
+            <td>Notes</td>
+            <td (click)="sortByBiddingStatus()">Bidding Status</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of filterTableData()">
+            <td>{{ data.ID }}</td>
+            <td>
+              <app-circle-progress
+                *ngIf="data.progressColor == 'red'"
+                [outerStrokeColor]="'#d55252'"
+                [innerStrokeColor]="'#f1c8c8'"
+                [percent]="data.percent"
+              ></app-circle-progress>
+
+              <app-circle-progress
+                *ngIf="data.progressColor == 'green'"
+                [outerStrokeColor]="'#58ac44'"
+                [innerStrokeColor]="'#C7E596'"
+                [percent]="data.percent"
+              ></app-circle-progress>
+            </td>
+
+            <td>
+              <fa-icon
+                *ngIf="data.flag == 'red'"
+                [icon]="flag"
+                [matMenuTriggerFor]="menu"
+                mat-button
+                class="iconStyle"
+                style="font-size: 18px; color: #d55252"
+              ></fa-icon>
+              <fa-icon
+                *ngIf="data.flag == 'green'"
+                [icon]="flag"
+                [matMenuTriggerFor]="menu"
+                mat-button
+                class="iconStyle"
+                style="font-size: 18px; color: #58ac44"
+              ></fa-icon>
+              <fa-icon
+                *ngIf="data.flag == 'grey'"
+                [icon]="flag"
+                [matMenuTriggerFor]="menu"
+                mat-button
+                class="iconStyle"
+                style="font-size: 18px; color: rgb(151, 151, 151)"
+              ></fa-icon>
+            </td>
+
+            <td>
+              <fa-icon
+                *ngIf="data.notesAdded == false"
+                [icon]="plus"
+                (click)="openDialog('add')"
+                style="font-size: 18px; color: #514e4e"
+              ></fa-icon>
+              <fa-icon
+                *ngIf="data.notesAdded == true"
+                [icon]="pen"
+                (click)="openDialog('view')"
+                style="font-size: 18px; color: #514e4e"
+              ></fa-icon>
+            </td>
+            <td>
+              <button
+                *ngIf="data.biddingStatus == 'open'"
+                class="biddingButton"
+              >
+                Open
+              </button>
+              <div *ngIf="data.biddingStatus == 'closed'">
+                <img
+                  class="hammer"
+                  src="https://img.icons8.com/fluency/48/000000/law.png"
+                />
+                Peter
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="RightSideContent">
+      <div class="CardContentOne">
+        <h1>Basic Details</h1>
+        <div class="borderLine"></div>
+        <p style="color: #31bfff">1FTEW1E52KKC90439</p>
+        <p>2019 Ford F-150 XLT</p>
+        <p style="color: #31bfff">Stockwave</p>
+        <p>Adj MMR</p>
+        <p>Mileage: <b class="descriptionValue">XXXXX</b></p>
+        <p>CR <b class="descriptionValue">XXXXXXXX</b></p>
+        <p>Announcement <b class="descriptionValue">XXXXXXXXXXXxxxxxxxx</b></p>
+        <p>NPV <b class="descriptionValue">NPV</b></p>
+        <p>Use/Event Check <b class="descriptionValue">Use/Event Check</b></p>
+        <p>Engine Type <b class="descriptionValue">xxxxxxxx</b></p>
+        <p>Fuel Type <b class="descriptionValue">XXXXXXXXXXXxxxxxxxx</b></p>
+        <p>Transmission <b class="descriptionValue">XXXXXXXXXXXxxxxxxxx</b></p>
+        <p>Seller <b class="descriptionValue">XXXXXXXXXxxxxxx</b></p>
+        <p style="color: #31bfff">Score Link</p>
+        <div class="detailCardInfo">
+          <p>ADESA Salt Lake (990 ml)</p>
+          <p>Start:Feb 15 | 2:00 AM | Ln F, Rn 56</p>
+        </div>
+        <div class="tableCard">
+          <table>
+            <tbody>
+              <tr>
+                <td class="tdOne">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      checked
+                      id="c1"
+                      class="checkboxAlignment"
+                    />
+                    <label for="c1"></label>
+                  </div>
+                  Major Status title Brand Check
+                </td>
+                <td class="tdContentAlignment">OK</td>
+                <td class="tdThree tdContentAlignment">More Info</td>
+              </tr>
+              <tr>
+                <td class="tdOne">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      checked
+                      id="c2"
+                      class="checkboxAlignment"
+                    />
+                    <label for="c2"></label>
+                  </div>
+                  Accident Check
+                </td>
+                <td class="tdContentAlignment">OK</td>
+                <td class="tdThree tdContentAlignment">More Info</td>
+              </tr>
+              <tr>
+                <td class="tdOne">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      checked
+                      id="c3"
+                      class="checkboxAlignment"
+                    />
+                    <label for="c3"></label>
+                  </div>
+                  Damage Check
+                </td>
+                <td class="tdContentAlignment">OK</td>
+                <td class="tdThree tdContentAlignment">More Info</td>
+              </tr>
+              <tr>
+                <td class="tdOne">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      checked
+                      id="c4"
+                      class="checkboxAlignment"
+                    />
+                    <label for="c4"></label>
+                  </div>
+                  Odometer Check
+                </td>
+                <td class="tdContentAlignment">OK</td>
+                <td class="tdThree tdContentAlignment">More Info</td>
+              </tr>
+              <tr>
+                <td class="tdOne">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      checked
+                      id="c5"
+                      class="checkboxAlignment"
+                    />
+                    <label for="c5"></label>
+                  </div>
+                  Vehicle Vages Check
+                </td>
+                <td class="tdContentAlignment">Personal Use</td>
+                <td class="tdThree tdContentAlignment">More Info</td>
+              </tr>
+              <tr>
+                <td class="tdOne">
+                  <div class="checkbox">
+                    <input
+                      type="checkbox"
+                      checked
+                      id="c6"
+                      class="checkboxAlignment"
+                    />
+                    <label for="c6"></label>
+                  </div>
+                  Auckcheck Buy Back Protection
+                </td>
+                <td class="tdContentAlignment">Qualifier</td>
+                <td class="tdThree tdContentAlignment">More Info</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="multipleCardContainer">
+          <div class="cardTable">
+            <div class="cardTableHead">
+              <div class="cardHeading leftHeading">2015 Honda Civic LX</div>
+              <div class="cardHeading centerHeading">
+                At A Glance
+                <div class="borderLine2"></div>
+              </div>
+              <div class="cardHeading rightHeading">128,947 ml</div>
+            </div>
+            <div class="Card">
+              <div class="CardHeader">
+                <div class="HeaderSection">Auto Check Accident Check</div>
+                <div class="HeaderSection">J.D Power Clean Trade-in</div>
+                <div class="HeaderSection">J.D Power Retail</div>
+              </div>
+              <div class="CardBody">
+                <div class="BodyContent">
+                  <div class="checkbox">
+                    <input type="checkbox" checked id="c7" />
+                    <label for="c7"></label>
+                  </div>
+                </div>
+                <div class="BodyContent cardBack1">$12,025</div>
+                <div class="BodyContent cardBack3">$14,400</div>
+              </div>
+            </div>
+
+            <div class="Card">
+              <div class="CardHeader">
+                <div class="HeaderSection">Auto Check Accident Check</div>
+                <div class="HeaderSection">J.D Power Clean Trade-in</div>
+                <div class="HeaderSection">J.D Power Retail</div>
+              </div>
+              <div class="CardBody">
+                <div class="BodyContent">
+                  <div class="checkbox">
+                    <input type="checkbox" checked id="c8" />
+                    <label for="c8"></label>
+                  </div>
+                </div>
+                <div class="BodyContent cardBack1">$12,025</div>
+                <div class="BodyContent cardBack3">$14,400</div>
+              </div>
+            </div>
+
+            <div class="Card">
+              <div class="CardHeader">
+                <div class="HeaderSection">Auto Check Accident Check</div>
+                <div class="HeaderSection">J.D Power Clean Trade-in</div>
+                <div class="HeaderSection">J.D Power Retail</div>
+              </div>
+              <div class="CardBody">
+                <div class="BodyContent">
+                  <div class="checkbox">
+                    <input type="checkbox" checked id="c9" />
+                    <label for="c9"></label>
+                  </div>
+                </div>
+                <div class="BodyContent cardBack4">$12,025</div>
+                <div class="BodyContent cardBack2">$14,400</div>
+              </div>
+            </div>
+
+            <div class="Card">
+              <div class="CardHeader">
+                <div class="HeaderSection">Auto Check Accident Check</div>
+                <div class="HeaderSection">J.D Power Clean Trade-in</div>
+                <div class="HeaderSection">J.D Power Retail</div>
+              </div>
+              <div class="CardBody">
+                <div class="BodyContent">
+                  <div class="checkbox">
+                    <input type="checkbox" checked id="c10" />
+                    <label for="c10"></label>
+                  </div>
+                </div>
+                <div class="BodyContent cardBack1">$12,025</div>
+                <div class="BodyContent cardBack3">$14,400</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="BidDetailCard">
+          <h1>Bidding Details</h1>
+          <div
+            class="borderLine"
+            style="width: 65%; margin-left: 55px; margin-bottom: 25px"
+          ></div>
+          <p>Bidding Status</p>
+          <p>Bidding By</p>
+          <p>Time</p>
+          <p class="price">
+            Price <b style="float: right; color: #c90909">$2908</b>
+          </p>
+          <div class="BidRangeDetail">
+            <div class="leftContainerBRD">AI Recommended Bidding Range</div>
+            <div class="RightContainerBRD">$1558 - $2960</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <input type="radio" name="flag" id="c11" />
+    <label for="c11">
+      <fa-icon
+        [icon]="flag"
+        class="iconStyle"
+        style="font-size: 18px; color: #d55252"
+      ></fa-icon>
+    </label>
+  </button>
+  <button mat-menu-item>
+    <input type="radio" name="flag" id="c11" />
+    <label for="c11">
+      <fa-icon
+        [icon]="flag"
+        class="iconStyle"
+        style="font-size: 18px; color: #58ac44"
+      ></fa-icon>
+    </label>
+  </button>
+  <button mat-menu-item>
+    <input type="radio" name="flag" id="c11" />
+    <label for="c11">
+      <fa-icon
+        [icon]="flag"
+        class="iconStyle"
+        style="font-size: 18px; color: rgb(151, 151, 151)"
+      ></fa-icon>
+    </label>
+  </button>
+</mat-menu>
